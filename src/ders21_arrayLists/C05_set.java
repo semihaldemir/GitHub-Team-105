@@ -1,0 +1,27 @@
+package ders21_arrayLists;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class C05_set {
+    public static void main(String[] args) {
+
+        int[] arr = {1,2,4,3,5,3,5,2,5,1,2,4,5,3,4,5};
+
+        // list.set(index, yenideğer) metodu
+        // istenen eski indexteki değeri silip bize döndürür
+        // ve o indextek ideğeri verdiğimiz yeni değer olarak atar
+
+        List<Integer> sayilar= new ArrayList<>();
+
+        for (int i = 0; i < arr.length ; i++) {
+            sayilar.add(arr[i]);
+
+            }
+        // Java'da set() u update için kullanılır
+        // sdd() ile set() farklıdır
+
+        System.out.println(sayilar.set(0, 8)); // eski değeri de gösterir
+        System.out.println(sayilar);
+    }
+}
