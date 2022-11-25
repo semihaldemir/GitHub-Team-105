@@ -1,7 +1,6 @@
 package ders44_maps;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MapDepo {
 
@@ -60,5 +59,67 @@ public class MapDepo {
             return ogrenciMap;
         }
 
+    }
+
+    public static void subeOgrenciBilgileriniYazdir(Map<Integer, String> ogrenciMap, String subeAdi) {
+        Collection<String> valueCollection = ogrenciMap.values();
+        System.out.println("İsim     Soyisim      Sınıf\n" +
+                           "===========================");
+        for (String each:valueCollection
+             ) {
+            // value'yu parçalarına ayır
+            String[] valueArr=each.split("-");
+            // şube ismini kontrol et
+            // istenen şube ise isim, soyisim, sınıf yazdır
+            if (valueArr[3].equals(subeAdi)){
+                System.out.println(valueArr[0]+" "+valueArr[1]+" "+valueArr[2]);
+            }
+        }
+
+    }
+
+    public static List<String> numaraDegerineGoreListeOlustur(Map<Integer, String> ogrenciMap, int basNo, int bitNo) {
+        // hem KEy hem de value lazım olduğundan Keyset oluşturduk
+        // sonra okey uzerinden value'yu map'ten aldık
+        Set<Integer> ogrenciKeySeti = ogrenciMap.keySet();
+
+        // döndüreceğimiz listeyi oluşturalım
+        List<String> isimListesi=new ArrayList<>();
+        // key değerlerini tek tek elden geçirip
+        // istenen aralıkta olanları bulalım
+
+        String value;
+        String[] valueArr;
+        String istenenIsim;
+        for (Integer eachKey:ogrenciKeySeti
+             ) {
+            if (basNo<=eachKey && eachKey<=bitNo){
+                // buraya verilen sınır değerlerine uyan
+                // eachKey'ler gelecek
+
+                // sınıra uygun Keyin valuesunu alalım
+                value=ogrenciMap.get(eachKey); // 104=Ayse-Can-10-H-MF
+                // valueyu parçalara arayalım
+                valueArr=value.split("-"); //[Ayşe, Can, 10, K, MF]
+
+                istenenIsim=valueArr[0]+" "+valueArr[1]+" "+valueArr[4];
+
+                //istenen ismi bulduk, bunu listeye ekleyelim
+                isimListesi.add(istenenIsim);
+            }
+        }return  isimListesi;
+    }
+
+    public static void numaraIsimSoyisimYazdir(Map<Integer, String> ogrenciMap) {
+        Set<Integer> keySeti=ogrenciMap.keySet();
+        String value;
+        String[] valueArr;
+        for (Integer eachKey:keySeti
+             ) {
+            value=ogrenciMap.get(eachKey);
+            valueArr=value.split("-");
+
+            System.out.println(eachKey+" "+valueArr[0]+" "+valueArr[1]);
+        }
     }
 }
